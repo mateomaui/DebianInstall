@@ -124,7 +124,10 @@ sudo apt update
 # https://www.linuxcapable.com/how-to-install-wine-on-debian-linux/
 # sudo dpkg --add-architecture i386
 curl -fSsL https://dl.winehq.org/wine-builds/winehq.key | gpg --dearmor | sudo tee /usr/share/keyrings/winehq.gpg > /dev/null
-echo deb [signed-by=/usr/share/keyrings/winehq.gpg] http://dl.winehq.org/wine-builds/debian/ $(lsb_release -cs) main | sudo tee /etc/apt/sources.list.d/winehq.list
+# The line below is commented out, as the "$(lsb_release -cs)" portion returns "faye" on Linux Mint Debian Edition, and there is no repo for that name.
+# Until an automated fix is found, just overriding it with a static "bookworm" identifier for Debian 12.
+# echo deb [signed-by=/usr/share/keyrings/winehq.gpg] http://dl.winehq.org/wine-builds/debian/ $(lsb_release -cs) main | sudo tee /etc/apt/sources.list.d/winehq.list
+echo deb [signed-by=/usr/share/keyrings/winehq.gpg] http://dl.winehq.org/wine-builds/debian/ bookworm main | sudo tee /etc/apt/sources.list.d/winehq.list
 sudo apt update
 #sudo apt install wine64 wine32 -y
 sudo apt-get -y install winehq-stable --install-recommends
