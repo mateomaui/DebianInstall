@@ -27,6 +27,10 @@
 #  - install desktop environment "kde-plasma-desktop" (minimal install)
 #  - add i386 architecture support (needed for Steam and Wine)
 #    - update repos for i386 support
+#  - install flatpak and store plugins <-- COMMENT OUT/DELETE FOR LINUX MINT DEBIAN EDITION
+#  - remove Firefox ESR (v115) <-- COMMENT OUT/DELETE FOR LINUX MINT DEBIAN EDITION
+#  - add repos for latest Firefox <-- COMMENT OUT/DELETE FOR LINUX MINT DEBIAN EDITION
+#  - install latest Firefox (firefox-mozilla-build) <-- COMMENT OUT/DELETE FOR LINUX MINT DEBIAN EDITION
 #  - add repos for wine
 #  - install wine
 #    - run winecfg (for initial files setup)
@@ -48,9 +52,6 @@
 #  - install latest Librewolf
 #  - install latest Mullvad Browser, and set as system default
 #  - install Tor Browser v13.0 (need to edit script for a different version)
-#  - remove Firefox ESR (v115)
-#  - add repos for latest Firefox
-#  - install latest Firefox (firefox-mozilla-build)
 #  - add repos for darktable
 #  - install darktable
 #  - install gimp
@@ -89,7 +90,6 @@
 #  - install alien (rpm package compatibility)
 #    - use as "sudo alien -d package-name.rpm" to convert .rpm to .deb
 #    - then install "sudo dpkg -i package-name.deb"
-#  - install flatpak and store plugins
 #  - install snapd and Snap Store (TAKES A REALLY LONG TIME)
 # >>>> - YOU MUST HIT "ENTER" WHEN DONE TO CONTINUE
 #  - one final apt update and upgrade
@@ -113,7 +113,13 @@ sudo apt-get -y install gdm3
 # install Cinnamon Desktop Environment
 sudo apt-get -y install cinnamon-desktop-environment
 
-# >> DISABLE/COMMENT OUT << FOR LINUX MINT DEBIAN EDITION (LMDE)
+###############################################################
+#
+#  DISABLE/COMMENT OUT/DELETE EVERYTHING IN THIS SECTION 
+#    FOR 
+#  >>> LINUX MINT DEBIAN EDITION (LMDE) <<<
+#
+###############################################################
 # install Flatpak services
 # https://www.linuxcapable.com/how-to-install-flatpak-on-debian-linux/
 sudo apt-get -y install flatpak
@@ -132,6 +138,11 @@ sudo rm ~/ubuntuzilla.gpg
 echo "deb [signed-by=/etc/apt/keyrings/ubuntuzilla.gpg] http://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt all main" | sudo tee /etc/apt/sources.list.d/ubuntuzilla.list > /dev/null
 sudo apt update
 sudo apt-get -y install firefox-mozilla-build
+###############################################################
+#
+#  END REMOVAL SECTION FOR LINUX MINT DEBIAN EDITION (LMDE)
+#
+###############################################################
 
 
 # Wine and winetricks - NEEDS A MANUAL CONFIRMATION
