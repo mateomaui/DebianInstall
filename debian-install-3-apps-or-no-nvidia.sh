@@ -313,13 +313,13 @@ rm -rf VMware-Player-Full-*.x86_64.bundle
 rm -rf vmware-host-modules
 
 # Fix vmware tools
-git clone https://github.com/rasa/vmware-tools-patches.git
-cd vmware-tools-patches
-sudo ./patched-open-vm-tools.sh
-cd ~
-sudo rm -rf vmware-tools-patches
+#git clone https://github.com/rasa/vmware-tools-patches.git
+#cd vmware-tools-patches
+#sudo ./patched-open-vm-tools.sh
+#cd ~
+#sudo rm -rf vmware-tools-patches
 # mount shared volumes temporarily
-sudo vmhgfs-fuse .host:/ /mnt/hgfs/ -o allow_other -o uid=1000
+#sudo vmhgfs-fuse .host:/ /mnt/hgfs/ -o allow_other -o uid=1000
 # If you want them mounted on startup, update /etc/fstab with the following:
 # Use shared folders between VMWare guest and host
 #.host:/    /mnt/hgfs/    fuse.vmhgfs-fuse    defaults,allow_other,uid=1000     0    0
