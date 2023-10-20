@@ -382,8 +382,8 @@ sudo apt-get -y install alien
 #     dpkg -l | grep package-name
 
 # enable snaps and snap store - TAKES A REALLY LONG TIME
-sudo apt-get -y install snapd
-sudo snap install snap-store
+#sudo apt-get -y install snapd
+#sudo snap install snap-store
 
 sudo apt update
 sudo apt upgrade -y
