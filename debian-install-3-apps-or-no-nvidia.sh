@@ -310,13 +310,13 @@ sudo apt update
 sudo apt-get -y install virtualbox-7.0
 # THIS NEXT PART MAY CHANGE, DEPENDING ON THE RESULT OF THE NEXT LINE
 vboxmanage -v | cut -dr -f1
-# if vboxmanage returns 7.0.10, then the lines below are correct. If not, change the lines below to match the returned number
-wget https://download.virtualbox.org/virtualbox/7.0.10/Oracle_VM_VirtualBox_Extension_Pack-7.0.10.vbox-extpack
+# if vboxmanage returns 7.0.12, then the lines below are correct. If not, change the lines below to match the returned number
+wget https://download.virtualbox.org/virtualbox/7.0.12/Oracle_VM_VirtualBox_Extension_Pack-7.0.12.vbox-extpack
 
 # ---> MANUAL CONFIRMATION NEEDED HERE
-sudo vboxmanage extpack install Oracle_VM_VirtualBox_Extension_Pack-7.0.10.vbox-extpack
+sudo vboxmanage extpack install Oracle_VM_VirtualBox_Extension_Pack-7.0.12.vbox-extpack
 sudo usermod -a -G vboxusers $USER
-rm -r -f Oracle_VM_VirtualBox_Extension_Pack-7.0.10.vbox-extpack
+rm -r -f Oracle_VM_VirtualBox_Extension_Pack-7.0.12.vbox-extpack
 
 
 # enable RPM package installation
