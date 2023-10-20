@@ -17,83 +17,83 @@
 # ./debian-install-3-apps-or-no-nvidia.sh
 
 # it will then:
-#		- initial apt update & upgrade
-#		- install dependencies necessary for all other installations, repo additions, etc
-#		- add repositories
+#  - initial apt update & upgrade
+#  - install dependencies necessary for all other installations, repo additions, etc
+#  - add repositories
 # >>>>	- YOU MUST HIT "ENTER" FOR THESE TO CONTINUE
-#		- install display manager "gdm3"
+#  - install display manager "gdm3"
 # >>>>	- YOU MUST CHOOSE A DISPLAY MANAGER TO CONTINUE
-#		- install desktop environment "cinnamon"
-#		- install desktop environment "kde-plasma-desktop" (minimal install)
-#		- add i386 architecture support (needed for Steam and Wine)
-#				- update repos for i386 support
-#		- add repos for wine
-#		- install wine
-#				- run winecfg (for initial files setup)
-#	>>>>			- YOU MUST CLICK THE BUTTON TO UPDATE, AND THEN CHOOSE YOUR WINDOWS VERSION AND SAVE TO CONTINUE
-#		- install winetricks (repo added earlier)
-#				- run winetricks (for initial files setup)
-#	>>>>			- YOU MUST "CANCEL" AFTER IT IS RUNNING TO CONTINUE
-#		- add repos for Steam
-#		- install Steam
-#				- run Steam (for initial setup, so directories are available for installing a plugin afterward)
+#  - install desktop environment "cinnamon"
+#  - install desktop environment "kde-plasma-desktop" (minimal install)
+#  - add i386 architecture support (needed for Steam and Wine)
+#    - update repos for i386 support
+#  - add repos for wine
+#  - install wine
+#    - run winecfg (for initial files setup)
+#	>>>>  	- YOU MUST CLICK THE BUTTON TO UPDATE, AND THEN CHOOSE YOUR WINDOWS VERSION AND SAVE TO CONTINUE
+#  - install winetricks (repo added earlier)
+#    - run winetricks (for initial files setup)
+#	>>>>  	- YOU MUST "CANCEL" AFTER IT IS RUNNING TO CONTINUE
+#  - add repos for Steam
+#  - install Steam
+#    - run Steam (for initial setup, so directories are available for installing a plugin afterward)
 #	>>>>	- YOU MUST WAIT FOR IT TO FINISH UPDATING, THEN EXIT THE APP ONCE YOU CAN SEE THE QR CODE TO CONTINUE
-#		- removes two unnecessary Steam repo sources
-#		- install dependencies for Boxtron (Steam compatibility plugin)
-#		- create directory in Steam for compatibilitytools.d, move into that directory
-#		- install Boxtron v0.5.4 (need to edit this script to install a different version)
-#		- install dependencies for Protontricks
-#		- install protontricks with pipx, set environment path
-#		- add dependencies and repos for Librewolf
-#		- install latest Librewolf
-#		- install latest Mullvad Browser, and set as system default
-#		- install Tor Browser v13.0 (need to edit script for a different version)
-#		- remove Firefox ESR (v115)
-#		- add repos for latest Firefox
-#		- install latest Firefox (firefox-mozilla-build)
-#		- add repos for darktable
-#		- install darktable
+#  - removes two unnecessary Steam repo sources
+#  - install dependencies for Boxtron (Steam compatibility plugin)
+#  - create directory in Steam for compatibilitytools.d, move into that directory
+#  - install Boxtron v0.5.4 (need to edit this script to install a different version)
+#  - install dependencies for Protontricks
+#  - install protontricks with pipx, set environment path
+#  - add dependencies and repos for Librewolf
+#  - install latest Librewolf
+#  - install latest Mullvad Browser, and set as system default
+#  - install Tor Browser v13.0 (need to edit script for a different version)
+#  - remove Firefox ESR (v115)
+#  - add repos for latest Firefox
+#  - install latest Firefox (firefox-mozilla-build)
+#  - add repos for darktable
+#  - install darktable
 #  - install gimp
 #      - install Diolinux's PhotoGIMP to give it a Photoshop GUI
-#		- install krita
-#		- install scribus
-#		- install inkscape
-#		- install rawtherapee
-#		- install audacity
-#		- install ffmpeg
-#		- install obs-studio
-#		- install pikopixel.app
-#		- install digikam
-#		- install kdenlive
-#		- install xournalpp
-#		- install deluge
-#		- install playonlinux
-#		- install Joplin
-#		- install Minigalaxy (thin GOG client)
-#				- use cat >> to make "minigalaxy-login.sh" shortcuts to the Desktop and user's home directory to load Minigalaxy using a "WEBKIT_DISABLE_COMPOSITING_MODE=1" fix for a bug that prevents the login window content from showing. After login, you shouldn't have to use these shortcuts again, and can launch Minigalaxy normally, unless you get logged out.
-#						- use chmod to make the shortcuts executable
-#		- install Lutris
-#		- install Heroic Games Launcher v2.9.2 (need to edit the script for a different version)
-#		- install VMWare Workstation Player 17.0.2 (need to edit the script for a different version)
-#		- if installing this inside a VM: (need to remove or comment out manually if not)
-#				- install fix vmware-tools-patches (fixes the ability to share folders between guest and host OSs)
-#				- removes vmware-tools-patches install folder
-#				- temporarily use vmhgfs-fuse to mount the folders to /mnt/hgfs/
-#						- must manually update /etc/fstab to make it permanent, adding to the end:
-#								.host:/    /mnt/hgfs/    fuse.vmhgfs-fuse    defaults,allow_other,uid=1000     0    0
-#		- install VirtualBox 7.0 (must edit this script for a different version)
-#				- runs vboxmanage to output the precise version of VirtualBox installed, saves to $VirtualBoxVersion variable
-#				- downloads extension pack for current version using $VirtualBoxVersion in paths
-#				- adds user to group vboxusers
-#				- removes extension pack download
-#		- install alien (rpm package compatibility)
-#				- use as "sudo alien -d package-name.rpm" to convert .rpm to .deb
-#				- then install "sudo dpkg -i package-name.deb"
-#		- install flatpak and store plugins
-#		- install snapd and Snap Store (TAKES A REALLY LONG TIME)
+#  - install krita
+#  - install scribus
+#  - install inkscape
+#  - install rawtherapee
+#  - install audacity
+#  - install ffmpeg
+#  - install obs-studio
+#  - install pikopixel.app
+#  - install digikam
+#  - install kdenlive
+#  - install xournalpp
+#  - install deluge
+#  - install playonlinux
+#  - install Joplin
+#  - install Minigalaxy (thin GOG client)
+#    - use cat >> to make "minigalaxy-login.sh" shortcuts to the Desktop and user's home directory to load Minigalaxy using a "WEBKIT_DISABLE_COMPOSITING_MODE=1" fix for a bug that prevents the login window content from showing. After login, you shouldn't have to use these shortcuts again, and can launch Minigalaxy normally, unless you get logged out.
+#      - use chmod to make the shortcuts executable
+#  - install Lutris
+#  - install Heroic Games Launcher v2.9.2 (need to edit the script for a different version)
+#  - install VMWare Workstation Player 17.0.2 (need to edit the script for a different version)
+#  - if installing this inside a VM: (need to remove or comment out manually if not)
+#    - install fix vmware-tools-patches (fixes the ability to share folders between guest and host OSs)
+#    - removes vmware-tools-patches install folder
+#    - temporarily use vmhgfs-fuse to mount the folders to /mnt/hgfs/
+#      - must manually update /etc/fstab to make it permanent, adding to the end:
+#        .host:/    /mnt/hgfs/    fuse.vmhgfs-fuse    defaults,allow_other,uid=1000     0    0
+#  - install VirtualBox 7.0 (must edit this script for a different version)
+#    - runs vboxmanage to output the precise version of VirtualBox installed, saves to $VirtualBoxVersion variable
+#    - downloads extension pack for current version using $VirtualBoxVersion in paths
+#    - adds user to group vboxusers
+#    - removes extension pack download
+#  - install alien (rpm package compatibility)
+#    - use as "sudo alien -d package-name.rpm" to convert .rpm to .deb
+#    - then install "sudo dpkg -i package-name.deb"
+#  - install flatpak and store plugins
+#  - install snapd and Snap Store (TAKES A REALLY LONG TIME)
 # >>>>	- YOU MUST HIT "ENTER" WHEN DONE TO CONTINUE
-#		- one final apt update and upgrade
-#		- apt clean and reboot
+#  - one final apt update and upgrade
+#  - apt clean and reboot
 
 
 cd ~
