@@ -20,6 +20,7 @@
 #  - initial apt update & upgrade
 #  - install dependencies necessary for all other installations, repo additions, etc
 #  - add repositories
+#
 #  [BEGIN SECTION NEEDING MANUAL INTERVENTION]
 #  - install desktop environment "kde-plasma-desktop" (minimal install)
 # >>>> - YOU MUST CHOOSE A DISPLAY MANAGER TO CONTINUE
@@ -48,12 +49,14 @@
 # >>>> - YOU MUST WAIT FOR IT TO FINISH UPDATING, THEN EXIT THE APP ONCE YOU CAN SEE THE QR CODE TO CONTINUE
 #  - removes two unnecessary Steam repo sources
 #  [END SECTION NEEDING MANUAL INTERVENTION]
+#
 #  [BEGIN SECTION TO REMOVE FOR LINUX MINT DEBIAN EDITION]
 #  - install flatpak and store plugins <-- DELETE FOR LINUX MINT DEBIAN EDITION
 #  - remove Firefox ESR (v115) <-- DELETE FOR LINUX MINT DEBIAN EDITION
 #  - add repos for latest Firefox <-- /DELETE FOR LINUX MINT DEBIAN EDITION
 #  - install latest Firefox (firefox-mozilla-build) <-- DELETE FOR LINUX MINT DEBIAN EDITION
 #  [END SECTION TO REMOVE FOR LINUX MINT DEBIAN EDITION]
+#
 #  - install desktop environment "cinnamon"
 #  - install winetricks (repo added earlier)
 #  - install DosBox and dependencies for Boxtron (Steam compatibility plugin)
