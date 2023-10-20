@@ -31,7 +31,6 @@
 #  - install wine
 #    - run winecfg (for initial files setup)
 # >>>>   - YOU MUST CLICK THE BUTTON TO UPDATE, AND THEN CHOOSE YOUR WINDOWS VERSION AND SAVE TO CONTINUE
-#  - install winetricks (repo added earlier)
 #  - install gimp
 #      - run gimp to setup initial files
 # >>>>   - YOU MUST EXIT GIMP TO CONTINUE
@@ -56,6 +55,7 @@
 #  - install latest Firefox (firefox-mozilla-build) <-- DELETE FOR LINUX MINT DEBIAN EDITION
 #  [END SECTION TO REMOVE FOR LINUX MINT DEBIAN EDITION]
 #  - install desktop environment "cinnamon"
+#  - install winetricks (repo added earlier)
 #  - install dependencies for Boxtron (Steam compatibility plugin)
 #  - create directory in Steam for compatibilitytools.d, move into that directory
 #  - install Boxtron v0.5.4 (need to edit this script to install a different version)
@@ -136,7 +136,6 @@ sudo apt-get -y install winehq-stable --install-recommends
 winecfg
 # install the add-on for winecfg when prompted
 # when the main winecfg screen appears, just select the type of Windows (Windows 10) and hit OK to continue for now
-sudo apt-get -y install winetricks
 
 # install GIMP
 sudo apt-get -y install gimp
@@ -222,6 +221,9 @@ sudo apt-get -y install firefox-mozilla-build
 
 # install Cinnamon Desktop Environment
 sudo apt-get -y install cinnamon-desktop-environment
+
+# install Winetricks
+sudo apt-get -y install winetricks
 
 # Install DosBox and Boxtron for Steam
 sudo apt-get -y install dosbox inotify-tools timidity fluid-soundfont-gm
