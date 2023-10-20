@@ -47,7 +47,7 @@
 #		- add dependencies and repos for Librewolf
 #		- install latest Librewolf
 #		- install latest Mullvad Browser, and set as system default
-#		-	install Tor Browser v13.0 (need to edit script for a different version)
+#		- install Tor Browser v13.0 (need to edit script for a different version)
 #		- remove Firefox ESR (v115)
 #		- add repos for latest Firefox
 #		- install latest Firefox (firefox-mozilla-build)
@@ -90,7 +90,7 @@
 #		- install flatpak and store plugins
 #		- install snapd and Snap Store (TAKES A REALLY LONG TIME)
 # >>>>	- YOU MUST HIT "ENTER" WHEN DONE TO CONTINUE
-#		- one final apt update and update
+#		- one final apt update and upgrade
 #		- apt clean and reboot
 
 
