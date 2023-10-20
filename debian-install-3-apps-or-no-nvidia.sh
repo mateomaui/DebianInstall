@@ -308,16 +308,12 @@ wget -O- -q https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg 
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle_vbox_2016.gpg] http://download.virtualbox.org/virtualbox/debian bookworm contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
 sudo apt update
 sudo apt-get -y install virtualbox-7.0
-# THIS NEXT PART MAY CHANGE, DEPENDING ON THE RESULT OF THE NEXT LINE
-vboxmanage -v | cut -dr -f1
-# if vboxmanage returns 7.0.12, then the lines below are correct. If not, change the lines below to match the returned number
-wget https://download.virtualbox.org/virtualbox/7.0.12/Oracle_VM_VirtualBox_Extension_Pack-7.0.12.vbox-extpack
-
+VirtualBoxVersion=$(vboxmanage -v | cut -dr -f1)
+wget https://download.virtualbox.org/virtualbox/$VirtualBoxVersion/Oracle_VM_VirtualBox_Extension_Pack-$VirtualBoxVersion.vbox-extpack
 # ---> MANUAL CONFIRMATION NEEDED HERE
-sudo vboxmanage extpack install Oracle_VM_VirtualBox_Extension_Pack-7.0.12.vbox-extpack
+sudo vboxmanage extpack install Oracle_VM_VirtualBox_Extension_Pack-$VirtualBoxVersion.vbox-extpack
 sudo usermod -a -G vboxusers $USER
-rm -r -f Oracle_VM_VirtualBox_Extension_Pack-7.0.12.vbox-extpack
-
+rm -r -f Oracle_VM_VirtualBox_Extension_Pack-$VirtualBoxVersion.vbox-extpack
 
 # enable RPM package installation
 sudo apt-get -y install alien
