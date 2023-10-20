@@ -20,29 +20,42 @@
 #  - initial apt update & upgrade
 #  - install dependencies necessary for all other installations, repo additions, etc
 #  - add repositories
-# >>>> - YOU MUST HIT "ENTER" FOR THESE TO CONTINUE
-#  - install display manager "gdm3"
-# >>>> - YOU MUST CHOOSE A DISPLAY MANAGER TO CONTINUE
-#  - install desktop environment "cinnamon"
+#  [BEGIN SECTION NEEDING MANUAL INTERVENTION]
 #  - install desktop environment "kde-plasma-desktop" (minimal install)
+# >>>> - YOU MUST CHOOSE A DISPLAY MANAGER TO CONTINUE
+#  - install display manager "gdm3" (not needed on Linux Mint Debian, but better than lightdm on Debian)
+# >>>> - YOU MUST CHOOSE A DISPLAY MANAGER TO CONTINUE
 #  - add i386 architecture support (needed for Steam and Wine)
 #    - update repos for i386 support
-#  - install flatpak and store plugins <-- COMMENT OUT/DELETE FOR LINUX MINT DEBIAN EDITION
-#  - remove Firefox ESR (v115) <-- COMMENT OUT/DELETE FOR LINUX MINT DEBIAN EDITION
-#  - add repos for latest Firefox <-- COMMENT OUT/DELETE FOR LINUX MINT DEBIAN EDITION
-#  - install latest Firefox (firefox-mozilla-build) <-- COMMENT OUT/DELETE FOR LINUX MINT DEBIAN EDITION
 #  - add repos for wine
 #  - install wine
 #    - run winecfg (for initial files setup)
 # >>>>   - YOU MUST CLICK THE BUTTON TO UPDATE, AND THEN CHOOSE YOUR WINDOWS VERSION AND SAVE TO CONTINUE
 #  - install winetricks (repo added earlier)
-#    - run winetricks (for initial files setup)
-# >>>>   - YOU MUST "CANCEL" AFTER IT IS RUNNING TO CONTINUE
+#  - install gimp
+#      - run gimp to setup initial files
+# >>>>   - YOU MUST EXIT GIMP TO CONTINUE
+#      - install Diolinux's PhotoGIMP to give it a Photoshop GUI
+#  - install VirtualBox 7.0 (must edit this script for a different version)
+#    - runs vboxmanage to output the precise version of VirtualBox installed, saves to $VirtualBoxVersion variable
+#    - downloads extension pack for current version using $VirtualBoxVersion in paths
+#    - runs extension pack installer
+# >>>>   - YOU MUST MANUALLY TYPE "y" and ENTER TO CONTINUE
+#    - adds user to group vboxusers
+#    - removes extension pack download
 #  - add repos for Steam
 #  - install Steam
 #    - run Steam (for initial setup, so directories are available for installing a plugin afterward)
 # >>>> - YOU MUST WAIT FOR IT TO FINISH UPDATING, THEN EXIT THE APP ONCE YOU CAN SEE THE QR CODE TO CONTINUE
 #  - removes two unnecessary Steam repo sources
+#  [END SECTION NEEDING MANUAL INTERVENTION]
+#  [BEGIN SECTION TO REMOVE FOR LINUX MINT DEBIAN EDITION]
+#  - install flatpak and store plugins <-- DELETE FOR LINUX MINT DEBIAN EDITION
+#  - remove Firefox ESR (v115) <-- DELETE FOR LINUX MINT DEBIAN EDITION
+#  - add repos for latest Firefox <-- /DELETE FOR LINUX MINT DEBIAN EDITION
+#  - install latest Firefox (firefox-mozilla-build) <-- DELETE FOR LINUX MINT DEBIAN EDITION
+#  [END SECTION TO REMOVE FOR LINUX MINT DEBIAN EDITION]
+#  - install desktop environment "cinnamon"
 #  - install dependencies for Boxtron (Steam compatibility plugin)
 #  - create directory in Steam for compatibilitytools.d, move into that directory
 #  - install Boxtron v0.5.4 (need to edit this script to install a different version)
@@ -54,8 +67,6 @@
 #  - install Tor Browser v13.0 (need to edit script for a different version)
 #  - add repos for darktable
 #  - install darktable
-#  - install gimp
-#      - install Diolinux's PhotoGIMP to give it a Photoshop GUI
 #  - install krita
 #  - install scribus
 #  - install inkscape
@@ -82,11 +93,6 @@
 #    - temporarily use vmhgfs-fuse to mount the folders to /mnt/hgfs/
 #      - must manually update /etc/fstab to make it permanent, adding to the end:
 #        .host:/    /mnt/hgfs/    fuse.vmhgfs-fuse    defaults,allow_other,uid=1000     0    0
-#  - install VirtualBox 7.0 (must edit this script for a different version)
-#    - runs vboxmanage to output the precise version of VirtualBox installed, saves to $VirtualBoxVersion variable
-#    - downloads extension pack for current version using $VirtualBoxVersion in paths
-#    - adds user to group vboxusers
-#    - removes extension pack download
 #  - install alien (rpm package compatibility)
 #    - use as "sudo alien -d package-name.rpm" to convert .rpm to .deb
 #    - then install "sudo dpkg -i package-name.deb"
@@ -105,40 +111,6 @@ sudo add-apt-repository contrib non-free
 # (no issues if it's run a second time)
 sudo dpkg --add-architecture i386
 sudo apt update
-
-#################################################################
-#
-#  DISABLE/COMMENT OUT/DELETE EVERYTHING IN THIS SECTION 
-#    FOR 
-#  >>> LINUX MINT DEBIAN EDITION (LMDE) <<<
-#
-#################################################################
-# install Flatpak services
-# https://www.linuxcapable.com/how-to-install-flatpak-on-debian-linux/
-sudo apt-get -y install flatpak
-sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-sudo apt-get -y install gnome-software-plugin-flatpak
-
-# >> DISABLE/COMMENT OUT << FOR LINUX MINT DEBIAN EDITION (LMDE)
-# remove Firefox ESR
-sudo apt purge firefox-esr -y
-# install latest version Firefox
-sudo mkdir /etc/apt/keyrings/
-sudo gpg --keyserver keyserver.ubuntu.com --recv-keys 2667CA5C
-sudo gpg -ao ~/ubuntuzilla.gpg --export 2667CA5C
-cat ubuntuzilla.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/ubuntuzilla.gpg
-sudo rm ~/ubuntuzilla.gpg
-echo "deb [signed-by=/etc/apt/keyrings/ubuntuzilla.gpg] http://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt all main" | sudo tee /etc/apt/sources.list.d/ubuntuzilla.list > /dev/null
-sudo apt update
-sudo apt-get -y install firefox-mozilla-build
-#################################################################
-#
-#  END REMOVAL SECTION FOR LINUX MINT DEBIAN EDITION (LMDE)
-#
-#################################################################
-
-# install Cinnamon Desktop Environment
-sudo apt-get -y install cinnamon-desktop-environment
 
 #################################################################
 #
@@ -204,7 +176,7 @@ sudo apt-get -y install \
   steam-launcher
 # run Steam to create default local profiles and update
 steam
-# CLOSE STEAM MANUALLY TO CONTINUE INSTALL SCRIPT, DON'T LOGIN HERE FOR NOW
+# ---> CLOSE STEAM MANUALLY TO CONTINUE INSTALL SCRIPT, DON'T LOGIN HERE FOR NOW
 # remove the two extra Steam sources
 sudo rm /etc/apt/sources.list.d/steam-beta.list
 sudo rm /etc/apt/sources.list.d/steam-stable.list
@@ -217,6 +189,41 @@ sudo rm /etc/apt/sources.list.d/steam-stable.list
 #
 #################################################################
 
+#################################################################
+#
+#  DISABLE/COMMENT OUT/DELETE EVERYTHING IN THIS SECTION 
+#    FOR 
+#  >>> LINUX MINT DEBIAN EDITION (LMDE) <<<
+#
+#################################################################
+# install Flatpak services
+# https://www.linuxcapable.com/how-to-install-flatpak-on-debian-linux/
+sudo apt-get -y install flatpak
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+sudo apt-get -y install gnome-software-plugin-flatpak
+
+# >> DISABLE/COMMENT OUT << FOR LINUX MINT DEBIAN EDITION (LMDE)
+# remove Firefox ESR
+sudo apt purge firefox-esr -y
+# install latest version Firefox
+sudo mkdir /etc/apt/keyrings/
+sudo gpg --keyserver keyserver.ubuntu.com --recv-keys 2667CA5C
+sudo gpg -ao ~/ubuntuzilla.gpg --export 2667CA5C
+cat ubuntuzilla.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/ubuntuzilla.gpg
+sudo rm ~/ubuntuzilla.gpg
+echo "deb [signed-by=/etc/apt/keyrings/ubuntuzilla.gpg] http://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt all main" | sudo tee /etc/apt/sources.list.d/ubuntuzilla.list > /dev/null
+sudo apt update
+sudo apt-get -y install firefox-mozilla-build
+#################################################################
+#
+#  END REMOVAL SECTION FOR LINUX MINT DEBIAN EDITION (LMDE)
+#
+#################################################################
+
+# install Cinnamon Desktop Environment
+sudo apt-get -y install cinnamon-desktop-environment
+
+# Install DosBox and Boxtron for Steam
 sudo apt-get -y install dosbox inotify-tools timidity fluid-soundfont-gm
 mkdir ~/.local/share/Steam/compatibilitytools.d
 cd ~/.local/share/Steam/compatibilitytools.d
