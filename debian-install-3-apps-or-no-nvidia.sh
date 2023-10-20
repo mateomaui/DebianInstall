@@ -197,9 +197,10 @@ cd ~
 
 # install Tor Browser 13.0 (regular package is broken)
 # https://www.linuxcapable.com/how-to-install-tor-browser-on-debian-linux/
-wget https://dist.torproject.org/torbrowser/13.0/tor-browser-linux-x86_64-13.0.tar.xz
-tar -xvJf tor-browser-linux-x86_64-13.0.tar.xz
-rm tor-browser-linux-x86_64-13.0.tar.xz
+TorBrowserVersion="13.0"
+wget https://dist.torproject.org/torbrowser/$TorBrowserVersion/tor-browser-linux-x86_64-$TorBrowserVersion.tar.xz
+tar -xvJf tor-browser-linux-x86_64-$TorBrowserVersion.tar.xz
+rm tor-browser-linux-x86_64-$TorBrowserVersion.tar.xz
 sudo rm -r -f ~/.local/share/tor-browser
 sudo mv -f tor-browser ~/.local/share/
 cd ~/.local/share/tor-browser
