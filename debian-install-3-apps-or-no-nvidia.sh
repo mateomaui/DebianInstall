@@ -225,6 +225,7 @@ sudo apt update
 sudo apt-get -y install darktable
 
 # install other apps that don't need specific repos added
+sudo apt-get -y install gimp
 sudo apt-get -y install krita
 sudo apt-get -y install scribus scribus-template icc-profiles-free
 sudo apt-get -y install inkscape
