@@ -160,6 +160,30 @@ winecfg
 # when the main winecfg screen appears, just select the type of Windows (Windows 10) and hit OK to continue for now
 sudo apt-get -y install winetricks
 
+# install GIMP
+sudo apt-get -y install gimp
+gimp
+# EXIT GIMP AFTER IT LOADS TO CONTINUE
+
+# install Diolinux's PhotoGIMP plugin to give GIMP a Photoshop GUI
+wget https://github.com/Diolinux/PhotoGIMP/releases/download/1.1/PhotoGIMP.zip
+unzip PhotoGIMP.zip
+sudo rm PhotoGIMP.zip
+sudo cp -R PhotoGIMP-master/.var/app/org.gimp.GIMP/config/GIMP/2.10/* $HOME/.config/GIMP/2.10/
+sudo rm -rf PhotoGIMP-master
+
+# install VirtualBox
+wget -O- -q https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmour -o /usr/share/keyrings/oracle_vbox_2016.gpg
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle_vbox_2016.gpg] http://download.virtualbox.org/virtualbox/debian bookworm contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
+sudo apt update
+sudo apt-get -y install virtualbox-7.0
+VirtualBoxVersion=$(vboxmanage -v | cut -dr -f1)
+wget https://download.virtualbox.org/virtualbox/$VirtualBoxVersion/Oracle_VM_VirtualBox_Extension_Pack-$VirtualBoxVersion.vbox-extpack
+# ---> MANUAL CONFIRMATION NEEDED HERE
+sudo vboxmanage extpack install Oracle_VM_VirtualBox_Extension_Pack-$VirtualBoxVersion.vbox-extpack
+sudo usermod -a -G vboxusers $USER
+rm -rf Oracle_VM_VirtualBox_Extension_Pack-$VirtualBoxVersion.vbox-extpack
+
 # Steam
 # https://www.linuxcapable.com/how-to-install-steam-on-debian-linux/
 # sudo dpkg --add-architecture i386
@@ -238,18 +262,6 @@ echo 'deb http://download.opensuse.org/repositories/graphics:/darktable/Debian_1
 curl -fsSL https://download.opensuse.org/repositories/graphics:darktable/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/graphics_darktable.gpg > /dev/null
 sudo apt update
 sudo apt-get -y install darktable
-
-# install GIMP
-sudo apt-get -y install gimp
-gimp
-# EXIT GIMP AFTER IT LOADS TO CONTINUE
-
-# install Diolinux's PhotoGIMP plugin to give GIMP a Photoshop GUI
-wget https://github.com/Diolinux/PhotoGIMP/releases/download/1.1/PhotoGIMP.zip
-unzip PhotoGIMP.zip
-sudo rm PhotoGIMP.zip
-sudo cp -R PhotoGIMP-master/.var/app/org.gimp.GIMP/config/GIMP/2.10/* $HOME/.config/GIMP/2.10/
-sudo rm -rf PhotoGIMP-master
 
 # install other apps that don't need specific repos added
 sudo apt-get -y install krita
@@ -331,18 +343,6 @@ rm -rf vmware-host-modules
 #.host:/    /mnt/hgfs/    fuse.vmhgfs-fuse    defaults,allow_other,uid=1000     0    0
 
 
-# install VirtualBox
-wget -O- -q https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmour -o /usr/share/keyrings/oracle_vbox_2016.gpg
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle_vbox_2016.gpg] http://download.virtualbox.org/virtualbox/debian bookworm contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
-sudo apt update
-sudo apt-get -y install virtualbox-7.0
-VirtualBoxVersion=$(vboxmanage -v | cut -dr -f1)
-wget https://download.virtualbox.org/virtualbox/$VirtualBoxVersion/Oracle_VM_VirtualBox_Extension_Pack-$VirtualBoxVersion.vbox-extpack
-# ---> MANUAL CONFIRMATION NEEDED HERE
-sudo vboxmanage extpack install Oracle_VM_VirtualBox_Extension_Pack-$VirtualBoxVersion.vbox-extpack
-sudo usermod -a -G vboxusers $USER
-rm -rf Oracle_VM_VirtualBox_Extension_Pack-$VirtualBoxVersion.vbox-extpack
-
 # enable RPM package installation
 sudo apt-get -y install alien
 #alien --version
@@ -354,7 +354,6 @@ sudo apt-get -y install alien
 #     sudo apt --fix-broken install
 # to check the installed package:
 #     dpkg -l | grep package-name
-
 
 # enable snaps and snap store - TAKES A REALLY LONG TIME
 sudo apt-get -y install snapd
