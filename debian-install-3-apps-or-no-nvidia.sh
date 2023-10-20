@@ -102,9 +102,9 @@ sudo apt update && sudo apt upgrade -y
 sudo apt-get -y install software-properties-common software-properties-gtk apt-transport-https dirmngr ca-certificates dkms curl
 
 # add repositories - STILL NEEDS A MANUAL CONFIRMATION
+sudo add-apt-repository contrib non-free non-free-firmware
 # for winetricks
 sudo add-apt-repository "deb http://ftp.us.debian.org/debian bookworm main contrib"
-sudo add-apt-repository contrib non-free non-free-firmware
 
 # install gdm3 display manager - STILL NEEDS A MANUAL CONFIRMATION
 sudo apt-get -y install gdm3
@@ -124,7 +124,7 @@ sudo apt update
 # https://www.linuxcapable.com/how-to-install-wine-on-debian-linux/
 # sudo dpkg --add-architecture i386
 curl -fSsL https://dl.winehq.org/wine-builds/winehq.key | gpg --dearmor | sudo tee /usr/share/keyrings/winehq.gpg > /dev/null
-# The line below is commented out, as the "$(lsb_release -cs)" portion returns "faye" on Linux Mint Debian Edition, and there is no repo for that name.
+# The line below is commented out, as the "$(lsb_release -cs)" portion returns "faye" on Linux Mint Debian Edition, and there is no winehq.org repo for that name.
 # Until an automated fix is found, just overriding it with a static "bookworm" identifier for Debian 12.
 # echo deb [signed-by=/usr/share/keyrings/winehq.gpg] http://dl.winehq.org/wine-builds/debian/ $(lsb_release -cs) main | sudo tee /etc/apt/sources.list.d/winehq.list
 echo deb [signed-by=/usr/share/keyrings/winehq.gpg] http://dl.winehq.org/wine-builds/debian/ bookworm main | sudo tee /etc/apt/sources.list.d/winehq.list
