@@ -80,8 +80,8 @@
 #						- must manually update /etc/fstab to make it permanent, adding to the end:
 #								.host:/    /mnt/hgfs/    fuse.vmhgfs-fuse    defaults,allow_other,uid=1000     0    0
 #		- install VirtualBox 7.0 (must edit this script for a different version)
-#				- runs vboxmanage **only** to output the precise version of VirtualBox installed (which at time of writing is version 7.0.10)
-#				- downloads extension pack for version 7.0.10 (must edit this script if version returned from vboxmanage changes)
+#				- runs vboxmanage to output the precise version of VirtualBox installed, saves to $VirtualBoxVersion variable
+#				- downloads extension pack for current version using $VirtualBoxVersion in paths
 #				- adds user to group vboxusers
 #				- removes extension pack download
 #		- install alien (rpm package compatibility)
@@ -172,7 +172,7 @@ pipx ensurepath
 # install Librewolf
 # https://librewolf.net/installation/debian/
 sudo apt update && sudo apt install -y wget gnupg lsb-release apt-transport-https ca-certificates
-distro=$(if echo " una bookworm vanessa focal jammy bullseye vera uma " | grep -q " $(lsb_release -sc) "; then lsb_release -sc; else echo focal; fi)
+distro=$(if echo " una bookworm vanessa focal jammy bullseye vera uma " | grep -q " $(lsb_release -sc) "; then lsb_release -sc; else echo bookworm; fi)
 wget -O- https://deb.librewolf.net/keyring.gpg | sudo gpg --dearmor -o /usr/share/keyrings/librewolf.gpg
 sudo tee /etc/apt/sources.list.d/librewolf.sources << EOF > /dev/null
 Types: deb
