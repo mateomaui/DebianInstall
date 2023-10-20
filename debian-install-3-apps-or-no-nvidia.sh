@@ -95,32 +95,46 @@
 #  - one final apt update and upgrade
 #  - apt clean and reboot
 
-
 cd ~
- 
 sudo apt update && sudo apt upgrade -y
-
 # install dependencies needed for Steam install etc, and for adding repositories
 sudo apt-get -y install software-properties-common software-properties-gtk apt-transport-https dirmngr ca-certificates dkms curl
-
 # add repositories - STILL NEEDS A MANUAL CONFIRMATION
-sudo add-apt-repository contrib non-free non-free-firmware
+sudo add-apt-repository contrib non-free
 # for winetricks
 sudo add-apt-repository "deb http://ftp.us.debian.org/debian bookworm main contrib"
-
-# install gdm3 display manager - STILL NEEDS A MANUAL CONFIRMATION
-sudo apt-get -y install gdm3
-
-# install Cinnamon Desktop Environment
-sudo apt-get -y install cinnamon-desktop-environment
-
-# install KDE Plasma
-sudo apt-get -y install kde-plasma-desktop
-
 # still must be installed even if no nVidia drivers, for Wine and Steam support
 # (no issues if it's run a second time)
 sudo dpkg --add-architecture i386
 sudo apt update
+
+# install KDE Plasma - NEEDS A MANUAL CONFIRMATION
+sudo apt-get -y install kde-plasma-desktop
+# install gdm3 display manager - NEEDS A MANUAL CONFIRMATION
+sudo apt-get -y install gdm3
+# install Cinnamon Desktop Environment
+sudo apt-get -y install cinnamon-desktop-environment
+
+# >> DISABLE/COMMENT OUT << FOR LINUX MINT DEBIAN EDITION (LMDE)
+# install Flatpak services
+# https://www.linuxcapable.com/how-to-install-flatpak-on-debian-linux/
+sudo apt-get -y install flatpak
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+sudo apt-get -y install gnome-software-plugin-flatpak
+
+# >> DISABLE/COMMENT OUT << FOR LINUX MINT DEBIAN EDITION (LMDE)
+# remove Firefox ESR
+sudo apt purge firefox-esr -y
+# install latest version Firefox
+sudo mkdir /etc/apt/keyrings/
+sudo gpg --keyserver keyserver.ubuntu.com --recv-keys 2667CA5C
+sudo gpg -ao ~/ubuntuzilla.gpg --export 2667CA5C
+cat ubuntuzilla.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/ubuntuzilla.gpg
+sudo rm ~/ubuntuzilla.gpg
+echo "deb [signed-by=/etc/apt/keyrings/ubuntuzilla.gpg] http://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt all main" | sudo tee /etc/apt/sources.list.d/ubuntuzilla.list > /dev/null
+sudo apt update
+sudo apt-get -y install firefox-mozilla-build
+
 
 # wine and winetricks - NEEDS A MANUAL CONFIRMATION
 # https://www.linuxcapable.com/how-to-install-wine-on-debian-linux/
@@ -214,18 +228,6 @@ cd ~/.local/share/tor-browser
 # rm -rf ~/.local/share/tor-browser
 cd ~
 
-# remove Firefox ESR
-sudo apt purge firefox-esr -y
-
-# install latest version Firefox
-sudo mkdir /etc/apt/keyrings/
-sudo gpg --keyserver keyserver.ubuntu.com --recv-keys 2667CA5C
-sudo gpg -ao ~/ubuntuzilla.gpg --export 2667CA5C
-cat ubuntuzilla.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/ubuntuzilla.gpg
-sudo rm ~/ubuntuzilla.gpg
-echo "deb [signed-by=/etc/apt/keyrings/ubuntuzilla.gpg] http://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt all main" | sudo tee /etc/apt/sources.list.d/ubuntuzilla.list > /dev/null
-sudo apt update
-sudo apt-get -y install firefox-mozilla-build
 
 # install darktable
 echo 'deb http://download.opensuse.org/repositories/graphics:/darktable/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/graphics:darktable.list
@@ -242,9 +244,7 @@ gimp
 wget https://github.com/Diolinux/PhotoGIMP/releases/download/1.1/PhotoGIMP.zip
 unzip PhotoGIMP.zip
 sudo rm PhotoGIMP.zip
-cd PhotoGIMP-master/.var/app/org.gimp.GIMP/config/GIMP/2.10/
-sudo cp -R * $HOME/.config/GIMP/2.10/
-cd ~
+sudo cp -R PhotoGIMP-master/.var/app/org.gimp.GIMP/config/GIMP/2.10/* $HOME/.config/GIMP/2.10/
 sudo rm -rf PhotoGIMP-master
 
 # install other apps that don't need specific repos added
@@ -271,16 +271,14 @@ sudo apt-get -y install minigalaxy
 cat >> minigalaxy-login.sh << 'END'
 WEBKIT_DISABLE_COMPOSITING_MODE=1 minigalaxy
 END
-# make shortcut executable
-sudo chmod +x minigalaxy-login.sh
-# run manually from File Manager, or from terminal with ./minigalaxy-login.sh
 # create another shortcut on the Desktop
 cat >> ~/Desktop/minigalaxy-login.sh << 'END'
 WEBKIT_DISABLE_COMPOSITING_MODE=1 minigalaxy
 END
-# make shortcut executable
+# make both shortcuts executable
+sudo chmod +x minigalaxy-login.sh
 sudo chmod +x ~/Desktop/minigalaxy-login.sh
-# run from Desktopn
+# (run manually from File Manager, or from terminal with ./minigalaxy-login.sh)
 
 
 # install Lutris
@@ -353,11 +351,6 @@ sudo apt-get -y install alien
 # to check the installed package:
 #     dpkg -l | grep package-name
 
-# install Flatpak services
-# https://www.linuxcapable.com/how-to-install-flatpak-on-debian-linux/
-sudo apt-get -y install flatpak
-sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-sudo apt-get -y install gnome-software-plugin-flatpak
 
 # enable snaps and snap store - TAKES A REALLY LONG TIME
 sudo apt-get -y install snapd
