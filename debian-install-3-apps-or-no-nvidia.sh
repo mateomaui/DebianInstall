@@ -97,14 +97,23 @@
 
 cd ~
 sudo apt update && sudo apt upgrade -y
-
 # install dependencies needed for Steam install etc, and for adding repositories
 sudo apt-get -y install software-properties-common software-properties-gtk apt-transport-https dirmngr ca-certificates dkms curl
-
 # add repositories - STILL NEEDS A MANUAL CONFIRMATION
-sudo add-apt-repository contrib non-free non-free-firmware
+sudo add-apt-repository contrib non-free
 # for winetricks
 sudo add-apt-repository "deb http://ftp.us.debian.org/debian bookworm main contrib"
+# still must be installed even if no nVidia drivers, for Wine and Steam support
+# (no issues if it's run a second time)
+sudo dpkg --add-architecture i386
+sudo apt update
+
+# install KDE Plasma - NEEDS A MANUAL CONFIRMATION
+sudo apt-get -y install kde-plasma-desktop
+# install gdm3 display manager - NEEDS A MANUAL CONFIRMATION
+sudo apt-get -y install gdm3
+# install Cinnamon Desktop Environment
+sudo apt-get -y install cinnamon-desktop-environment
 
 # >> DISABLE/COMMENT OUT << FOR LINUX MINT DEBIAN EDITION (LMDE)
 # install Flatpak services
@@ -116,8 +125,6 @@ sudo apt-get -y install gnome-software-plugin-flatpak
 # >> DISABLE/COMMENT OUT << FOR LINUX MINT DEBIAN EDITION (LMDE)
 # remove Firefox ESR
 sudo apt purge firefox-esr -y
-
-# >> DISABLE/COMMENT OUT << FOR LINUX MINT DEBIAN EDITION (LMDE)
 # install latest version Firefox
 sudo mkdir /etc/apt/keyrings/
 sudo gpg --keyserver keyserver.ubuntu.com --recv-keys 2667CA5C
@@ -128,20 +135,6 @@ echo "deb [signed-by=/etc/apt/keyrings/ubuntuzilla.gpg] http://downloads.sourcef
 sudo apt update
 sudo apt-get -y install firefox-mozilla-build
 
-
-# install gdm3 display manager - STILL NEEDS A MANUAL CONFIRMATION
-sudo apt-get -y install gdm3
-
-# install Cinnamon Desktop Environment
-sudo apt-get -y install cinnamon-desktop-environment
-
-# install KDE Plasma
-sudo apt-get -y install kde-plasma-desktop
-
-# still must be installed even if no nVidia drivers, for Wine and Steam support
-# (no issues if it's run a second time)
-sudo dpkg --add-architecture i386
-sudo apt update
 
 # wine and winetricks - NEEDS A MANUAL CONFIRMATION
 # https://www.linuxcapable.com/how-to-install-wine-on-debian-linux/
