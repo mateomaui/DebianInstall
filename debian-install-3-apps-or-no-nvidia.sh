@@ -100,7 +100,6 @@
 #    - use as "sudo alien -d package-name.rpm" to convert .rpm to .deb
 #    - then install "sudo dpkg -i package-name.deb"
 #  - install snapd and Snap Store (TAKES A REALLY LONG TIME)
-# >>>> - YOU MUST HIT "ENTER" WHEN DONE TO CONTINUE
 #  - one final apt update and upgrade
 #  - apt clean and reboot
 
@@ -180,7 +179,7 @@ sudo rm /etc/apt/sources.list.d/steam-stable.list
 #
 # END SECTION NEEDING MANUAL CONFIRMATION OR EXIT PROGRAM
 #
-# NOTHING ELSE SHOULD NEED INTERVENTION UNTIL RIGHT BEFORE REBOOT
+# NOTHING ELSE SHOULD NEED INTERVENTION BEFORE AUTOMATIC REBOOT
 #
 #################################################################
 
