@@ -192,6 +192,7 @@ rm mullvad-browser.tar.xz && cd mullvad-browser
 ./start-mullvad-browser.desktop --register-app --setDefaultBrowser
 # to uninstall:
 # cd ~/.local/share/mullvad-browser && ./start-mullvad-browser.desktop --unregister-app
+# cd ~
 # rm -rf ~/.local/share/mullvad-browser
 cd ~
 
@@ -201,10 +202,14 @@ TorBrowserVersion="13.0"
 wget https://dist.torproject.org/torbrowser/$TorBrowserVersion/tor-browser-linux-x86_64-$TorBrowserVersion.tar.xz
 tar -xvJf tor-browser-linux-x86_64-$TorBrowserVersion.tar.xz
 rm tor-browser-linux-x86_64-$TorBrowserVersion.tar.xz
-sudo rm -r -f ~/.local/share/tor-browser
+sudo rm -rf ~/.local/share/tor-browser
 sudo mv -f tor-browser ~/.local/share/
 cd ~/.local/share/tor-browser
 ./start-tor-browser.desktop --register-app
+# to uninstall:
+# cd ~/.local/share/tor-browser && ./start-tor-browser.desktop --unregister-app
+# cd ~
+# rm -rf ~/.local/share/tor-browser
 cd ~
 
 # remove Firefox ESR
@@ -276,7 +281,7 @@ sudo apt-get -y install lutris
 # https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher
 wget https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/download/v2.9.2/heroic_2.9.2_amd64.deb
 sudo dpkg -i heroic_*_amd64.deb
-rm -r -f heroic_*_amd64.deb 
+rm -rf heroic_*_amd64.deb 
 
 
 # VMWare Workstation Player 17
@@ -293,15 +298,15 @@ make
 sudo make install
 sudo /etc/init.d/vmware start
 cd ~
-rm -r -f VMware-Player-Full-*.x86_64.bundle
-rm -r -f vmware-host-modules
+rm -rf VMware-Player-Full-*.x86_64.bundle
+rm -rf vmware-host-modules
 
 # Fix vmware tools
 git clone https://github.com/rasa/vmware-tools-patches.git
 cd vmware-tools-patches
 sudo ./patched-open-vm-tools.sh
 cd ~
-sudo rm -r -f vmware-tools-patches
+sudo rm -rf vmware-tools-patches
 # mount shared volumes temporarily
 sudo vmhgfs-fuse .host:/ /mnt/hgfs/ -o allow_other -o uid=1000
 # If you want them mounted on startup, update /etc/fstab with the following:
@@ -319,7 +324,7 @@ wget https://download.virtualbox.org/virtualbox/$VirtualBoxVersion/Oracle_VM_Vir
 # ---> MANUAL CONFIRMATION NEEDED HERE
 sudo vboxmanage extpack install Oracle_VM_VirtualBox_Extension_Pack-$VirtualBoxVersion.vbox-extpack
 sudo usermod -a -G vboxusers $USER
-rm -r -f Oracle_VM_VirtualBox_Extension_Pack-$VirtualBoxVersion.vbox-extpack
+rm -rf Oracle_VM_VirtualBox_Extension_Pack-$VirtualBoxVersion.vbox-extpack
 
 # enable RPM package installation
 sudo apt-get -y install alien
