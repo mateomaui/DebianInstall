@@ -100,6 +100,7 @@ sudo apt update && sudo apt upgrade -y
 
 # install dependencies needed for Steam install etc, and for adding repositories
 sudo apt-get -y install software-properties-common software-properties-gtk apt-transport-https dirmngr ca-certificates dkms curl
+
 # add repositories - STILL NEEDS A MANUAL CONFIRMATION
 sudo add-apt-repository contrib non-free non-free-firmware
 # for winetricks
