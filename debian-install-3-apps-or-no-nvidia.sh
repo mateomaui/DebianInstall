@@ -33,7 +33,7 @@
 #    - run winecfg (for initial files setup)
 # >>>>   - YOU MUST CLICK THE BUTTON TO UPDATE, AND THEN CHOOSE YOUR WINDOWS VERSION AND SAVE TO CONTINUE
 #  - install gimp
-#      - run gimp to setup initial files
+#      - run gimp to setup initial files (to install a Photoshop GUI plugin later)
 # >>>>   - YOU MUST EXIT GIMP TO CONTINUE
 #  - install VirtualBox 7.0 (must edit this script for a different version)
 #    - runs vboxmanage to output the precise version of VirtualBox installed, saves to $VirtualBoxVersion variable
@@ -141,8 +141,9 @@ winecfg
 
 # install GIMP
 sudo apt-get -y install gimp
+# run gimp now to create initial user files, to add a plugin for Photoshop GUI later
 gimp
-# EXIT GIMP AFTER IT LOADS TO CONTINUE
+# ---> EXIT GIMP AFTER IT LOADS TO CONTINUE
 
 # install VirtualBox
 wget -O- -q https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmour -o /usr/share/keyrings/oracle_vbox_2016.gpg
