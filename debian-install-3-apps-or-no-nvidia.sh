@@ -3,7 +3,7 @@
 # if there is a root account, be sure to add [username] to sudoers group (from root), to give sudo root access to user.
 # usermod -aG sudo [username]
 
-# to edit this file:
+# to edit or create this file:
 # sudo nano debian-install-3-apps-or-no-nvidia.sh
 
 # to make executable, run this in terminal after you save it
