@@ -101,8 +101,6 @@ sudo apt update && sudo apt upgrade -y
 sudo apt-get -y install software-properties-common software-properties-gtk apt-transport-https dirmngr ca-certificates dkms curl
 # add repositories - STILL NEEDS A MANUAL CONFIRMATION
 sudo add-apt-repository contrib non-free
-# for winetricks
-sudo add-apt-repository "deb http://ftp.us.debian.org/debian bookworm main contrib"
 # still must be installed even if no nVidia drivers, for Wine and Steam support
 # (no issues if it's run a second time)
 sudo dpkg --add-architecture i386
