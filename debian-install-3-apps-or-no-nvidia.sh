@@ -53,6 +53,8 @@
 #		- install latest Firefox (firefox-mozilla-build)
 #		- add repos for darktable
 #		- install darktable
+#  - install gimp
+#      - install Diolinux's PhotoGIMP to give it a Photoshop GUI
 #		- install krita
 #		- install scribus
 #		- install inkscape
@@ -231,8 +233,21 @@ curl -fsSL https://download.opensuse.org/repositories/graphics:darktable/Debian_
 sudo apt update
 sudo apt-get -y install darktable
 
-# install other apps that don't need specific repos added
+# install GIMP
 sudo apt-get -y install gimp
+gimp
+# EXIT GIMP AFTER IT LOADS TO CONTINUE
+
+# install Diolinux's PhotoGIMP plugin to give GIMP a Photoshop GUI
+wget https://github.com/Diolinux/PhotoGIMP/releases/download/1.1/PhotoGIMP.zip
+unzip PhotoGIMP.zip
+sudo rm PhotoGIMP.zip
+cd PhotoGIMP-master/.var/app/org.gimp.GIMP/config/GIMP/2.10/
+sudo cp -R * $HOME/.config/GIMP/2.10/
+cd ~
+sudo rm -rf PhotoGIMP-master
+
+# install other apps that don't need specific repos added
 sudo apt-get -y install krita
 sudo apt-get -y install scribus scribus-template icc-profiles-free
 sudo apt-get -y install inkscape
