@@ -134,7 +134,7 @@ sudo apt update
 sudo apt-get -y install firefox-mozilla-build
 
 
-# wine and winetricks - NEEDS A MANUAL CONFIRMATION
+# Wine and winetricks - NEEDS A MANUAL CONFIRMATION
 # https://www.linuxcapable.com/how-to-install-wine-on-debian-linux/
 # sudo dpkg --add-architecture i386
 curl -fSsL https://dl.winehq.org/wine-builds/winehq.key | gpg --dearmor | sudo tee /usr/share/keyrings/winehq.gpg > /dev/null
@@ -143,16 +143,11 @@ curl -fSsL https://dl.winehq.org/wine-builds/winehq.key | gpg --dearmor | sudo t
 # echo deb [signed-by=/usr/share/keyrings/winehq.gpg] http://dl.winehq.org/wine-builds/debian/ $(lsb_release -cs) main | sudo tee /etc/apt/sources.list.d/winehq.list
 echo deb [signed-by=/usr/share/keyrings/winehq.gpg] http://dl.winehq.org/wine-builds/debian/ bookworm main | sudo tee /etc/apt/sources.list.d/winehq.list
 sudo apt update
-#sudo apt install wine64 wine32 -y
 sudo apt-get -y install winehq-stable --install-recommends
 winecfg
 # install the add-on for winecfg when prompted
 # when the main winecfg screen appears, just select the type of Windows (Windows 10) and hit OK to continue for now
 sudo apt-get -y install winetricks
-# Commented out running winetricks, because no need... was originally done prior to installing allfonts, but right now that gets 404 errors so a pre-run isn't needed.
-#winetricks
-# just cancel out when WineTricks loads
-#!winetricks allfonts (getting 404 errors)
 
 # Steam
 # https://www.linuxcapable.com/how-to-install-steam-on-debian-linux/
