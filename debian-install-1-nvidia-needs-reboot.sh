@@ -1,6 +1,7 @@
 #! /bin/bash
 
 # if there is a root account, be sure to add [username] to sudoers group (from root), to give sudo root access to user.
+# NOTE >> Some things cannot be installed as "root", be logged in as someone other than root (but with root access) before running this.
 # usermod -aG sudo [username]
 
 # to edit or create this file:
