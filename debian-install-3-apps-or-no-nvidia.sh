@@ -106,20 +106,13 @@ sudo add-apt-repository contrib non-free
 sudo dpkg --add-architecture i386
 sudo apt update
 
-# install KDE Plasma - NEEDS A MANUAL CONFIRMATION
-sudo apt-get -y install kde-plasma-desktop
-# install gdm3 display manager - NEEDS A MANUAL CONFIRMATION
-sudo apt-get -y install gdm3
-# install Cinnamon Desktop Environment
-sudo apt-get -y install cinnamon-desktop-environment
-
-###############################################################
+#################################################################
 #
 #  DISABLE/COMMENT OUT/DELETE EVERYTHING IN THIS SECTION 
 #    FOR 
 #  >>> LINUX MINT DEBIAN EDITION (LMDE) <<<
 #
-###############################################################
+#################################################################
 # install Flatpak services
 # https://www.linuxcapable.com/how-to-install-flatpak-on-debian-linux/
 sudo apt-get -y install flatpak
@@ -138,12 +131,25 @@ sudo rm ~/ubuntuzilla.gpg
 echo "deb [signed-by=/etc/apt/keyrings/ubuntuzilla.gpg] http://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt all main" | sudo tee /etc/apt/sources.list.d/ubuntuzilla.list > /dev/null
 sudo apt update
 sudo apt-get -y install firefox-mozilla-build
-###############################################################
+#################################################################
 #
 #  END REMOVAL SECTION FOR LINUX MINT DEBIAN EDITION (LMDE)
 #
-###############################################################
+#################################################################
 
+# install Cinnamon Desktop Environment
+sudo apt-get -y install cinnamon-desktop-environment
+
+#################################################################
+#
+# BEGIN SECTION NEEDING MANUAL CONFIRMATION OR EXIT PROGRAM
+#
+#################################################################
+
+# install KDE Plasma - NEEDS A MANUAL CONFIRMATION
+sudo apt-get -y install kde-plasma-desktop
+# install gdm3 display manager - NEEDS A MANUAL CONFIRMATION
+sudo apt-get -y install gdm3
 
 # Wine and winetricks - NEEDS A MANUAL CONFIRMATION
 # https://www.linuxcapable.com/how-to-install-wine-on-debian-linux/
@@ -202,6 +208,14 @@ steam
 # remove the two extra Steam sources
 sudo rm /etc/apt/sources.list.d/steam-beta.list
 sudo rm /etc/apt/sources.list.d/steam-stable.list
+
+#################################################################
+#
+# END SECTION NEEDING MANUAL CONFIRMATION OR EXIT PROGRAM
+#
+# NOTHING ELSE SHOULD NEED INTERVENTION UNTIL RIGHT BEFORE REBOOT
+#
+#################################################################
 
 sudo apt-get -y install dosbox inotify-tools timidity fluid-soundfont-gm
 mkdir ~/.local/share/Steam/compatibilitytools.d
