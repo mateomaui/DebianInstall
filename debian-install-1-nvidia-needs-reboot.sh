@@ -23,9 +23,7 @@
 # USE AT YOUR OWN RISK
 
 cd ~
-
 sudo apt update && sudo apt upgrade -y
-
 # install dependencies needed for Steam install etc, and for adding repositories
 sudo apt-get -y install software-properties-common software-properties-gtk apt-transport-https dirmngr ca-certificates dkms curl
 
@@ -38,10 +36,7 @@ sudo /usr/local/cuda-X.Y/bin/cuda-uninstall
 # nvidia repository
 curl -fSsL https://developer.download.nvidia.com/compute/cuda/repos/debian11/x86_64/3bf863cc.pub | sudo gpg --dearmor | sudo tee /usr/share/keyrings/nvidia-drivers.gpg > /dev/null 2>&1
 sudo tee /etc/apt/sources.list.d/nvidia-drivers.list
-# for winetricks
-sudo add-apt-repository "deb http://ftp.us.debian.org/debian bookworm main contrib"
-sudo add-apt-repository contrib non-free non-free-firmware
-
+sudo add-apt-repository contrib non-free
 
 sudo apt update && sudo apt upgrade -y
 
