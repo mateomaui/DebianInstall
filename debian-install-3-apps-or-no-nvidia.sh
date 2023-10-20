@@ -340,7 +340,7 @@ rm -rf heroic_*_amd64.deb
 
 
 # VMWare Workstation Player 17
-sudo apt-get -y install build-essential gcc perl bzip2 dkms make
+sudo apt-get -y install build-essential gcc perl bzip2 dkms make git
 sudo apt-get -y install linux-headers-$(uname -r)
 sudo apt update && sudo apt upgrade -y
 wget https://download3.vmware.com/software/WKST-PLAYER-1750/VMware-Player-Full-17.5.0-22583795.x86_64.bundle
