@@ -20,31 +20,47 @@
 #  - initial apt update & upgrade
 #  - install dependencies necessary for all other installations, repo additions, etc
 #  - add repositories
-# >>>> - YOU MUST HIT "ENTER" FOR THESE TO CONTINUE
-#  - install display manager "gdm3"
-# >>>> - YOU MUST CHOOSE A DISPLAY MANAGER TO CONTINUE
-#  - install desktop environment "cinnamon"
+#
+#  [BEGIN SECTION NEEDING MANUAL INTERVENTION]
 #  - install desktop environment "kde-plasma-desktop" (minimal install)
+# >>>> - YOU MUST CHOOSE A DISPLAY MANAGER TO CONTINUE
+#  - install display manager "gdm3" (not needed on Linux Mint Debian, but better than lightdm on Debian)
+# >>>> - YOU MUST CHOOSE A DISPLAY MANAGER TO CONTINUE
 #  - add i386 architecture support (needed for Steam and Wine)
 #    - update repos for i386 support
-#  - install flatpak and store plugins <-- COMMENT OUT/DELETE FOR LINUX MINT DEBIAN EDITION
-#  - remove Firefox ESR (v115) <-- COMMENT OUT/DELETE FOR LINUX MINT DEBIAN EDITION
-#  - add repos for latest Firefox <-- COMMENT OUT/DELETE FOR LINUX MINT DEBIAN EDITION
-#  - install latest Firefox (firefox-mozilla-build) <-- COMMENT OUT/DELETE FOR LINUX MINT DEBIAN EDITION
 #  - add repos for wine
 #  - install wine
 #    - run winecfg (for initial files setup)
 # >>>>   - YOU MUST CLICK THE BUTTON TO UPDATE, AND THEN CHOOSE YOUR WINDOWS VERSION AND SAVE TO CONTINUE
-#  - install winetricks (repo added earlier)
-#    - run winetricks (for initial files setup)
-# >>>>   - YOU MUST "CANCEL" AFTER IT IS RUNNING TO CONTINUE
+#  - install gimp
+#      - run gimp to setup initial files
+# >>>>   - YOU MUST EXIT GIMP TO CONTINUE
+#      - install Diolinux's PhotoGIMP to give it a Photoshop GUI
+#  - install VirtualBox 7.0 (must edit this script for a different version)
+#    - runs vboxmanage to output the precise version of VirtualBox installed, saves to $VirtualBoxVersion variable
+#    - downloads extension pack for current version using $VirtualBoxVersion in paths
+#    - runs extension pack installer
+# >>>>   - YOU MUST MANUALLY TYPE "y" and ENTER TO CONTINUE
+#    - adds user to group vboxusers
+#    - removes extension pack download
 #  - add repos for Steam
 #  - install Steam
 #    - run Steam (for initial setup, so directories are available for installing a plugin afterward)
 # >>>> - YOU MUST WAIT FOR IT TO FINISH UPDATING, THEN EXIT THE APP ONCE YOU CAN SEE THE QR CODE TO CONTINUE
 #  - removes two unnecessary Steam repo sources
-#  - install dependencies for Boxtron (Steam compatibility plugin)
-#  - create directory in Steam for compatibilitytools.d, move into that directory
+#  [END SECTION NEEDING MANUAL INTERVENTION]
+#
+#  [BEGIN SECTION TO REMOVE FOR LINUX MINT DEBIAN EDITION]
+#  - install flatpak and store plugins <-- DELETE FOR LINUX MINT DEBIAN EDITION
+#  - remove Firefox ESR (v115) <-- DELETE FOR LINUX MINT DEBIAN EDITION
+#  - add repos for latest Firefox <-- /DELETE FOR LINUX MINT DEBIAN EDITION
+#  - install latest Firefox (firefox-mozilla-build) <-- DELETE FOR LINUX MINT DEBIAN EDITION
+#  [END SECTION TO REMOVE FOR LINUX MINT DEBIAN EDITION]
+#
+#  - install desktop environment "cinnamon"
+#  - install winetricks (repo added earlier)
+#  - install DosBox and dependencies for Boxtron (Steam compatibility plugin)
+#    - create "compatibilitytools.d" directory in Steam for Boxtron, move into that directory
 #  - install Boxtron v0.5.4 (need to edit this script to install a different version)
 #  - install dependencies for Protontricks
 #  - install protontricks with pipx, set environment path
@@ -54,8 +70,6 @@
 #  - install Tor Browser v13.0 (need to edit script for a different version)
 #  - add repos for darktable
 #  - install darktable
-#  - install gimp
-#      - install Diolinux's PhotoGIMP to give it a Photoshop GUI
 #  - install krita
 #  - install scribus
 #  - install inkscape
@@ -82,11 +96,6 @@
 #    - temporarily use vmhgfs-fuse to mount the folders to /mnt/hgfs/
 #      - must manually update /etc/fstab to make it permanent, adding to the end:
 #        .host:/    /mnt/hgfs/    fuse.vmhgfs-fuse    defaults,allow_other,uid=1000     0    0
-#  - install VirtualBox 7.0 (must edit this script for a different version)
-#    - runs vboxmanage to output the precise version of VirtualBox installed, saves to $VirtualBoxVersion variable
-#    - downloads extension pack for current version using $VirtualBoxVersion in paths
-#    - adds user to group vboxusers
-#    - removes extension pack download
 #  - install alien (rpm package compatibility)
 #    - use as "sudo alien -d package-name.rpm" to convert .rpm to .deb
 #    - then install "sudo dpkg -i package-name.deb"
@@ -106,20 +115,89 @@ sudo add-apt-repository contrib non-free
 sudo dpkg --add-architecture i386
 sudo apt update
 
+#################################################################
+#
+# BEGIN SECTION NEEDING MANUAL CONFIRMATION OR EXIT PROGRAM
+#
+#################################################################
+
 # install KDE Plasma - NEEDS A MANUAL CONFIRMATION
 sudo apt-get -y install kde-plasma-desktop
 # install gdm3 display manager - NEEDS A MANUAL CONFIRMATION
 sudo apt-get -y install gdm3
-# install Cinnamon Desktop Environment
-sudo apt-get -y install cinnamon-desktop-environment
 
-###############################################################
+# Wine and winetricks - NEEDS A MANUAL CONFIRMATION
+# https://www.linuxcapable.com/how-to-install-wine-on-debian-linux/
+# sudo dpkg --add-architecture i386
+curl -fSsL https://dl.winehq.org/wine-builds/winehq.key | gpg --dearmor | sudo tee /usr/share/keyrings/winehq.gpg > /dev/null
+# The line below is commented out, as the "$(lsb_release -cs)" portion returns "faye" on Linux Mint Debian Edition, and there is no winehq.org repo for that name.
+# Until an automated fix is found, just overriding it with a static "bookworm" identifier for Debian 12.
+# echo deb [signed-by=/usr/share/keyrings/winehq.gpg] http://dl.winehq.org/wine-builds/debian/ $(lsb_release -cs) main | sudo tee /etc/apt/sources.list.d/winehq.list
+echo deb [signed-by=/usr/share/keyrings/winehq.gpg] http://dl.winehq.org/wine-builds/debian/ bookworm main | sudo tee /etc/apt/sources.list.d/winehq.list
+sudo apt update
+sudo apt-get -y install winehq-stable --install-recommends
+winecfg
+# install the add-on for winecfg when prompted
+# when the main winecfg screen appears, just select the type of Windows (Windows 10) and hit OK to continue for now
+
+# install GIMP
+sudo apt-get -y install gimp
+gimp
+# EXIT GIMP AFTER IT LOADS TO CONTINUE
+
+# install Diolinux's PhotoGIMP plugin to give GIMP a Photoshop GUI
+wget https://github.com/Diolinux/PhotoGIMP/releases/download/1.1/PhotoGIMP.zip
+unzip PhotoGIMP.zip
+sudo rm PhotoGIMP.zip
+sudo cp -R PhotoGIMP-master/.var/app/org.gimp.GIMP/config/GIMP/2.10/* $HOME/.config/GIMP/2.10/
+sudo rm -rf PhotoGIMP-master
+
+# install VirtualBox
+wget -O- -q https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmour -o /usr/share/keyrings/oracle_vbox_2016.gpg
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle_vbox_2016.gpg] http://download.virtualbox.org/virtualbox/debian bookworm contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
+sudo apt update
+sudo apt-get -y install virtualbox-7.0
+VirtualBoxVersion=$(vboxmanage -v | cut -dr -f1)
+wget https://download.virtualbox.org/virtualbox/$VirtualBoxVersion/Oracle_VM_VirtualBox_Extension_Pack-$VirtualBoxVersion.vbox-extpack
+# ---> MANUAL CONFIRMATION NEEDED HERE
+sudo vboxmanage extpack install Oracle_VM_VirtualBox_Extension_Pack-$VirtualBoxVersion.vbox-extpack
+sudo usermod -a -G vboxusers $USER
+rm -rf Oracle_VM_VirtualBox_Extension_Pack-$VirtualBoxVersion.vbox-extpack
+
+# Steam
+# https://www.linuxcapable.com/how-to-install-steam-on-debian-linux/
+# sudo dpkg --add-architecture i386
+curl -s http://repo.steampowered.com/steam/archive/stable/steam.gpg | sudo tee /usr/share/keyrings/steam.gpg > /dev/null
+echo deb [arch=amd64,i386 signed-by=/usr/share/keyrings/steam.gpg] http://repo.steampowered.com/steam/ stable steam | sudo tee /etc/apt/sources.list.d/steam.list
+sudo apt update
+sudo apt-get -y install \
+  libgl1-mesa-dri:amd64 \
+  libgl1-mesa-dri:i386 \
+  libgl1-mesa-glx:amd64 \
+  libgl1-mesa-glx:i386 \
+  steam-launcher
+# run Steam to create default local profiles and update
+steam
+# ---> CLOSE STEAM MANUALLY TO CONTINUE INSTALL SCRIPT, DON'T LOGIN HERE FOR NOW
+# remove the two extra Steam sources
+sudo rm /etc/apt/sources.list.d/steam-beta.list
+sudo rm /etc/apt/sources.list.d/steam-stable.list
+
+#################################################################
+#
+# END SECTION NEEDING MANUAL CONFIRMATION OR EXIT PROGRAM
+#
+# NOTHING ELSE SHOULD NEED INTERVENTION UNTIL RIGHT BEFORE REBOOT
+#
+#################################################################
+
+#################################################################
 #
 #  DISABLE/COMMENT OUT/DELETE EVERYTHING IN THIS SECTION 
 #    FOR 
 #  >>> LINUX MINT DEBIAN EDITION (LMDE) <<<
 #
-###############################################################
+#################################################################
 # install Flatpak services
 # https://www.linuxcapable.com/how-to-install-flatpak-on-debian-linux/
 sudo apt-get -y install flatpak
@@ -138,47 +216,19 @@ sudo rm ~/ubuntuzilla.gpg
 echo "deb [signed-by=/etc/apt/keyrings/ubuntuzilla.gpg] http://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt all main" | sudo tee /etc/apt/sources.list.d/ubuntuzilla.list > /dev/null
 sudo apt update
 sudo apt-get -y install firefox-mozilla-build
-###############################################################
+#################################################################
 #
 #  END REMOVAL SECTION FOR LINUX MINT DEBIAN EDITION (LMDE)
 #
-###############################################################
+#################################################################
 
+# install Cinnamon Desktop Environment
+sudo apt-get -y install cinnamon-desktop-environment
 
-# Wine and winetricks - NEEDS A MANUAL CONFIRMATION
-# https://www.linuxcapable.com/how-to-install-wine-on-debian-linux/
-# sudo dpkg --add-architecture i386
-curl -fSsL https://dl.winehq.org/wine-builds/winehq.key | gpg --dearmor | sudo tee /usr/share/keyrings/winehq.gpg > /dev/null
-# The line below is commented out, as the "$(lsb_release -cs)" portion returns "faye" on Linux Mint Debian Edition, and there is no winehq.org repo for that name.
-# Until an automated fix is found, just overriding it with a static "bookworm" identifier for Debian 12.
-# echo deb [signed-by=/usr/share/keyrings/winehq.gpg] http://dl.winehq.org/wine-builds/debian/ $(lsb_release -cs) main | sudo tee /etc/apt/sources.list.d/winehq.list
-echo deb [signed-by=/usr/share/keyrings/winehq.gpg] http://dl.winehq.org/wine-builds/debian/ bookworm main | sudo tee /etc/apt/sources.list.d/winehq.list
-sudo apt update
-sudo apt-get -y install winehq-stable --install-recommends
-winecfg
-# install the add-on for winecfg when prompted
-# when the main winecfg screen appears, just select the type of Windows (Windows 10) and hit OK to continue for now
+# install Winetricks
 sudo apt-get -y install winetricks
 
-# Steam
-# https://www.linuxcapable.com/how-to-install-steam-on-debian-linux/
-# sudo dpkg --add-architecture i386
-curl -s http://repo.steampowered.com/steam/archive/stable/steam.gpg | sudo tee /usr/share/keyrings/steam.gpg > /dev/null
-echo deb [arch=amd64,i386 signed-by=/usr/share/keyrings/steam.gpg] http://repo.steampowered.com/steam/ stable steam | sudo tee /etc/apt/sources.list.d/steam.list
-sudo apt update
-sudo apt-get -y install \
-  libgl1-mesa-dri:amd64 \
-  libgl1-mesa-dri:i386 \
-  libgl1-mesa-glx:amd64 \
-  libgl1-mesa-glx:i386 \
-  steam-launcher
-# run Steam to create default local profiles and update
-steam
-# CLOSE STEAM MANUALLY TO CONTINUE INSTALL SCRIPT, DON'T LOGIN HERE FOR NOW
-# remove the two extra Steam sources
-sudo rm /etc/apt/sources.list.d/steam-beta.list
-sudo rm /etc/apt/sources.list.d/steam-stable.list
-
+# Install DosBox and Boxtron for Steam
 sudo apt-get -y install dosbox inotify-tools timidity fluid-soundfont-gm
 mkdir ~/.local/share/Steam/compatibilitytools.d
 cd ~/.local/share/Steam/compatibilitytools.d
@@ -238,18 +288,6 @@ echo 'deb http://download.opensuse.org/repositories/graphics:/darktable/Debian_1
 curl -fsSL https://download.opensuse.org/repositories/graphics:darktable/Debian_12/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/graphics_darktable.gpg > /dev/null
 sudo apt update
 sudo apt-get -y install darktable
-
-# install GIMP
-sudo apt-get -y install gimp
-gimp
-# EXIT GIMP AFTER IT LOADS TO CONTINUE
-
-# install Diolinux's PhotoGIMP plugin to give GIMP a Photoshop GUI
-wget https://github.com/Diolinux/PhotoGIMP/releases/download/1.1/PhotoGIMP.zip
-unzip PhotoGIMP.zip
-sudo rm PhotoGIMP.zip
-sudo cp -R PhotoGIMP-master/.var/app/org.gimp.GIMP/config/GIMP/2.10/* $HOME/.config/GIMP/2.10/
-sudo rm -rf PhotoGIMP-master
 
 # install other apps that don't need specific repos added
 sudo apt-get -y install krita
@@ -331,18 +369,6 @@ rm -rf vmware-host-modules
 #.host:/    /mnt/hgfs/    fuse.vmhgfs-fuse    defaults,allow_other,uid=1000     0    0
 
 
-# install VirtualBox
-wget -O- -q https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmour -o /usr/share/keyrings/oracle_vbox_2016.gpg
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle_vbox_2016.gpg] http://download.virtualbox.org/virtualbox/debian bookworm contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
-sudo apt update
-sudo apt-get -y install virtualbox-7.0
-VirtualBoxVersion=$(vboxmanage -v | cut -dr -f1)
-wget https://download.virtualbox.org/virtualbox/$VirtualBoxVersion/Oracle_VM_VirtualBox_Extension_Pack-$VirtualBoxVersion.vbox-extpack
-# ---> MANUAL CONFIRMATION NEEDED HERE
-sudo vboxmanage extpack install Oracle_VM_VirtualBox_Extension_Pack-$VirtualBoxVersion.vbox-extpack
-sudo usermod -a -G vboxusers $USER
-rm -rf Oracle_VM_VirtualBox_Extension_Pack-$VirtualBoxVersion.vbox-extpack
-
 # enable RPM package installation
 sudo apt-get -y install alien
 #alien --version
@@ -354,7 +380,6 @@ sudo apt-get -y install alien
 #     sudo apt --fix-broken install
 # to check the installed package:
 #     dpkg -l | grep package-name
-
 
 # enable snaps and snap store - TAKES A REALLY LONG TIME
 sudo apt-get -y install snapd
