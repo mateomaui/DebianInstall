@@ -242,9 +242,7 @@ gimp
 wget https://github.com/Diolinux/PhotoGIMP/releases/download/1.1/PhotoGIMP.zip
 unzip PhotoGIMP.zip
 sudo rm PhotoGIMP.zip
-cd PhotoGIMP-master/.var/app/org.gimp.GIMP/config/GIMP/2.10/
-sudo cp -R * $HOME/.config/GIMP/2.10/
-cd ~
+sudo cp -R PhotoGIMP-master/.var/app/org.gimp.GIMP/config/GIMP/2.10/* $HOME/.config/GIMP/2.10/
 sudo rm -rf PhotoGIMP-master
 
 # install other apps that don't need specific repos added
@@ -271,16 +269,14 @@ sudo apt-get -y install minigalaxy
 cat >> minigalaxy-login.sh << 'END'
 WEBKIT_DISABLE_COMPOSITING_MODE=1 minigalaxy
 END
-# make shortcut executable
-sudo chmod +x minigalaxy-login.sh
-# run manually from File Manager, or from terminal with ./minigalaxy-login.sh
 # create another shortcut on the Desktop
 cat >> ~/Desktop/minigalaxy-login.sh << 'END'
 WEBKIT_DISABLE_COMPOSITING_MODE=1 minigalaxy
 END
-# make shortcut executable
+# make both shortcuts executable
+sudo chmod +x minigalaxy-login.sh
 sudo chmod +x ~/Desktop/minigalaxy-login.sh
-# run from Desktopn
+# (run manually from File Manager, or from terminal with ./minigalaxy-login.sh)
 
 
 # install Lutris
