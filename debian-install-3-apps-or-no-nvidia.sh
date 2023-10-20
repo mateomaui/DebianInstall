@@ -35,7 +35,6 @@
 #  - install gimp
 #      - run gimp to setup initial files
 # >>>>   - YOU MUST EXIT GIMP TO CONTINUE
-#      - install Diolinux's PhotoGIMP to give it a Photoshop GUI
 #  - install VirtualBox 7.0 (must edit this script for a different version)
 #    - runs vboxmanage to output the precise version of VirtualBox installed, saves to $VirtualBoxVersion variable
 #    - downloads extension pack for current version using $VirtualBoxVersion in paths
@@ -58,6 +57,7 @@
 #  [END SECTION TO REMOVE FOR LINUX MINT DEBIAN EDITION]
 #
 #  - install desktop environment "cinnamon"
+#  - install GIMP plugin "Diolinux's PhotoGIMP" to give it a Photoshop GUI
 #  - install winetricks (repo added earlier)
 #  - install DosBox and dependencies for Boxtron (Steam compatibility plugin)
 #    - create "compatibilitytools.d" directory in Steam for Boxtron, move into that directory
@@ -145,13 +145,6 @@ sudo apt-get -y install gimp
 gimp
 # EXIT GIMP AFTER IT LOADS TO CONTINUE
 
-# install Diolinux's PhotoGIMP plugin to give GIMP a Photoshop GUI
-wget https://github.com/Diolinux/PhotoGIMP/releases/download/1.1/PhotoGIMP.zip
-unzip PhotoGIMP.zip
-sudo rm PhotoGIMP.zip
-sudo cp -R PhotoGIMP-master/.var/app/org.gimp.GIMP/config/GIMP/2.10/* $HOME/.config/GIMP/2.10/
-sudo rm -rf PhotoGIMP-master
-
 # install VirtualBox
 wget -O- -q https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmour -o /usr/share/keyrings/oracle_vbox_2016.gpg
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle_vbox_2016.gpg] http://download.virtualbox.org/virtualbox/debian bookworm contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
@@ -224,6 +217,13 @@ sudo apt-get -y install firefox-mozilla-build
 
 # install Cinnamon Desktop Environment
 sudo apt-get -y install cinnamon-desktop-environment
+
+# install Diolinux's PhotoGIMP plugin to give GIMP a Photoshop GUI
+wget https://github.com/Diolinux/PhotoGIMP/releases/download/1.1/PhotoGIMP.zip
+unzip PhotoGIMP.zip
+sudo rm PhotoGIMP.zip
+sudo cp -R PhotoGIMP-master/.var/app/org.gimp.GIMP/config/GIMP/2.10/* $HOME/.config/GIMP/2.10/
+sudo rm -rf PhotoGIMP-master
 
 # install Winetricks
 sudo apt-get -y install winetricks
