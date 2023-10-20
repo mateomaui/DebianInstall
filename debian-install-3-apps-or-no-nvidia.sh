@@ -20,9 +20,9 @@
 #  - initial apt update & upgrade
 #  - install dependencies necessary for all other installations, repo additions, etc
 #  - add repositories
-# >>>>	- YOU MUST HIT "ENTER" FOR THESE TO CONTINUE
+# >>>> - YOU MUST HIT "ENTER" FOR THESE TO CONTINUE
 #  - install display manager "gdm3"
-# >>>>	- YOU MUST CHOOSE A DISPLAY MANAGER TO CONTINUE
+# >>>> - YOU MUST CHOOSE A DISPLAY MANAGER TO CONTINUE
 #  - install desktop environment "cinnamon"
 #  - install desktop environment "kde-plasma-desktop" (minimal install)
 #  - add i386 architecture support (needed for Steam and Wine)
@@ -30,14 +30,14 @@
 #  - add repos for wine
 #  - install wine
 #    - run winecfg (for initial files setup)
-#	>>>>  	- YOU MUST CLICK THE BUTTON TO UPDATE, AND THEN CHOOSE YOUR WINDOWS VERSION AND SAVE TO CONTINUE
+# >>>>   - YOU MUST CLICK THE BUTTON TO UPDATE, AND THEN CHOOSE YOUR WINDOWS VERSION AND SAVE TO CONTINUE
 #  - install winetricks (repo added earlier)
 #    - run winetricks (for initial files setup)
-#	>>>>  	- YOU MUST "CANCEL" AFTER IT IS RUNNING TO CONTINUE
+# >>>>   - YOU MUST "CANCEL" AFTER IT IS RUNNING TO CONTINUE
 #  - add repos for Steam
 #  - install Steam
 #    - run Steam (for initial setup, so directories are available for installing a plugin afterward)
-#	>>>>	- YOU MUST WAIT FOR IT TO FINISH UPDATING, THEN EXIT THE APP ONCE YOU CAN SEE THE QR CODE TO CONTINUE
+# >>>> - YOU MUST WAIT FOR IT TO FINISH UPDATING, THEN EXIT THE APP ONCE YOU CAN SEE THE QR CODE TO CONTINUE
 #  - removes two unnecessary Steam repo sources
 #  - install dependencies for Boxtron (Steam compatibility plugin)
 #  - create directory in Steam for compatibilitytools.d, move into that directory
@@ -91,7 +91,7 @@
 #    - then install "sudo dpkg -i package-name.deb"
 #  - install flatpak and store plugins
 #  - install snapd and Snap Store (TAKES A REALLY LONG TIME)
-# >>>>	- YOU MUST HIT "ENTER" WHEN DONE TO CONTINUE
+# >>>> - YOU MUST HIT "ENTER" WHEN DONE TO CONTINUE
 #  - one final apt update and upgrade
 #  - apt clean and reboot
 
