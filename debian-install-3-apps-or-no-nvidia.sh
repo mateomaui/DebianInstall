@@ -95,18 +95,38 @@
 #  - one final apt update and upgrade
 #  - apt clean and reboot
 
-
 cd ~
- 
 sudo apt update && sudo apt upgrade -y
 
 # install dependencies needed for Steam install etc, and for adding repositories
 sudo apt-get -y install software-properties-common software-properties-gtk apt-transport-https dirmngr ca-certificates dkms curl
-
 # add repositories - STILL NEEDS A MANUAL CONFIRMATION
 sudo add-apt-repository contrib non-free non-free-firmware
 # for winetricks
 sudo add-apt-repository "deb http://ftp.us.debian.org/debian bookworm main contrib"
+
+# >> DISABLE/COMMENT OUT << FOR LINUX MINT DEBIAN EDITION (LMDE)
+# install Flatpak services
+# https://www.linuxcapable.com/how-to-install-flatpak-on-debian-linux/
+sudo apt-get -y install flatpak
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+sudo apt-get -y install gnome-software-plugin-flatpak
+
+# >> DISABLE/COMMENT OUT << FOR LINUX MINT DEBIAN EDITION (LMDE)
+# remove Firefox ESR
+sudo apt purge firefox-esr -y
+
+# >> DISABLE/COMMENT OUT << FOR LINUX MINT DEBIAN EDITION (LMDE)
+# install latest version Firefox
+sudo mkdir /etc/apt/keyrings/
+sudo gpg --keyserver keyserver.ubuntu.com --recv-keys 2667CA5C
+sudo gpg -ao ~/ubuntuzilla.gpg --export 2667CA5C
+cat ubuntuzilla.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/ubuntuzilla.gpg
+sudo rm ~/ubuntuzilla.gpg
+echo "deb [signed-by=/etc/apt/keyrings/ubuntuzilla.gpg] http://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt all main" | sudo tee /etc/apt/sources.list.d/ubuntuzilla.list > /dev/null
+sudo apt update
+sudo apt-get -y install firefox-mozilla-build
+
 
 # install gdm3 display manager - STILL NEEDS A MANUAL CONFIRMATION
 sudo apt-get -y install gdm3
@@ -214,18 +234,6 @@ cd ~/.local/share/tor-browser
 # rm -rf ~/.local/share/tor-browser
 cd ~
 
-# remove Firefox ESR
-sudo apt purge firefox-esr -y
-
-# install latest version Firefox
-sudo mkdir /etc/apt/keyrings/
-sudo gpg --keyserver keyserver.ubuntu.com --recv-keys 2667CA5C
-sudo gpg -ao ~/ubuntuzilla.gpg --export 2667CA5C
-cat ubuntuzilla.gpg | sudo gpg --dearmor -o /etc/apt/keyrings/ubuntuzilla.gpg
-sudo rm ~/ubuntuzilla.gpg
-echo "deb [signed-by=/etc/apt/keyrings/ubuntuzilla.gpg] http://downloads.sourceforge.net/project/ubuntuzilla/mozilla/apt all main" | sudo tee /etc/apt/sources.list.d/ubuntuzilla.list > /dev/null
-sudo apt update
-sudo apt-get -y install firefox-mozilla-build
 
 # install darktable
 echo 'deb http://download.opensuse.org/repositories/graphics:/darktable/Debian_12/ /' | sudo tee /etc/apt/sources.list.d/graphics:darktable.list
@@ -349,11 +357,6 @@ sudo apt-get -y install alien
 # to check the installed package:
 #     dpkg -l | grep package-name
 
-# install Flatpak services
-# https://www.linuxcapable.com/how-to-install-flatpak-on-debian-linux/
-sudo apt-get -y install flatpak
-sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-sudo apt-get -y install gnome-software-plugin-flatpak
 
 # enable snaps and snap store - TAKES A REALLY LONG TIME
 sudo apt-get -y install snapd
