@@ -330,24 +330,15 @@ sudo apt-get -y install alien
 # to check the installed package:
 #     dpkg -l | grep package-name
 
-
 # install Flatpak services
 # https://www.linuxcapable.com/how-to-install-flatpak-on-debian-linux/
 sudo apt-get -y install flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 sudo apt-get -y install gnome-software-plugin-flatpak
 
-
 # enable snaps and snap store - TAKES A REALLY LONG TIME
 sudo apt-get -y install snapd
 sudo snap install snap-store
-
-# Photoshop?
-# https://github.com/CSMarckitus/Photoshop
-# git clone https://gitlab.com/csmarckitus1/photoshop.git
-# cd photoshop
-# make
-#./Photoshop2020
 
 sudo apt update
 sudo apt upgrade -y
