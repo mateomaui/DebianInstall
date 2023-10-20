@@ -56,8 +56,8 @@
 #  [END SECTION TO REMOVE FOR LINUX MINT DEBIAN EDITION]
 #  - install desktop environment "cinnamon"
 #  - install winetricks (repo added earlier)
-#  - install dependencies for Boxtron (Steam compatibility plugin)
-#  - create directory in Steam for compatibilitytools.d, move into that directory
+#  - install DosBox and dependencies for Boxtron (Steam compatibility plugin)
+#    - create "compatibilitytools.d" directory in Steam for Boxtron, move into that directory
 #  - install Boxtron v0.5.4 (need to edit this script to install a different version)
 #  - install dependencies for Protontricks
 #  - install protontricks with pipx, set environment path
