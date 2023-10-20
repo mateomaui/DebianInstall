@@ -182,7 +182,7 @@ sudo apt update
 sudo apt-get -y install librewolf
 
 # install Mullvad Browser (current)
-cd ~/.local/share && wget https://mullvad.net/en/download/browser/linux64/latest -O mullvad-browser.tar.xz
+cd ~/.local/share && wget https://mullvad.net/en/download/browser/linux-x86_64/latest -O mullvad-browser.tar.xz
 tar -xvf mullvad-browser.tar.xz mullvad-browser
 rm mullvad-browser.tar.xz && cd mullvad-browser
 ./start-mullvad-browser.desktop --register-app --setDefaultBrowser
