@@ -125,7 +125,7 @@ sudo apt update
 # install KDE Plasma - NEEDS A MANUAL CONFIRMATION
 sudo apt-get -y install kde-plasma-desktop
 # install gdm3 display manager - NEEDS A MANUAL CONFIRMATION
-sudo apt-get -y install gdm3
+#sudo apt-get -y install gdm3
 
 # Wine and winetricks - NEEDS A MANUAL CONFIRMATION
 # https://www.linuxcapable.com/how-to-install-wine-on-debian-linux/
