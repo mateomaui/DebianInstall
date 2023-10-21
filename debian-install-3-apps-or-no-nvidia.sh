@@ -89,7 +89,7 @@
 #      - use chmod to make the shortcuts executable
 #  - install Lutris
 #  - install Heroic Games Launcher v2.9.2 (need to edit the script for a different version)
-#  - install VMWare Workstation Player 17.0.2 (need to edit the script for a different version)
+#  - install VMWare Workstation Player 17.5.0 (need to edit the script for a different version)
 #  - if installing this inside a VM: (need to remove or comment out manually if not)
 #    - install fix vmware-tools-patches (fixes the ability to share folders between guest and host OSs)
 #    - removes vmware-tools-patches install folder
@@ -340,15 +340,15 @@ rm -rf heroic_*_amd64.deb
 
 
 # VMWare Workstation Player 17
-sudo apt-get -y install build-essential gcc perl bzip2 dkms make
+sudo apt-get -y install build-essential gcc perl bzip2 dkms make git
 sudo apt-get -y install linux-headers-$(uname -r)
 sudo apt update && sudo apt upgrade -y
-wget https://download3.vmware.com/software/WKST-PLAYER-1702/VMware-Player-Full-17.0.2-21581411.x86_64.bundle
+wget https://download3.vmware.com/software/WKST-PLAYER-1750/VMware-Player-Full-17.5.0-22583795.x86_64.bundle
 chmod +x VMware-Player-Full-*.x86_64.bundle
 sudo ./VMware-Player-Full-*.x86_64.bundle
 git clone https://github.com/mkubecek/vmware-host-modules.git
 cd vmware-host-modules
-git checkout workstation-17.0.2
+git checkout workstation-17.5.0
 make
 sudo make install
 sudo /etc/init.d/vmware start
@@ -382,8 +382,8 @@ sudo apt-get -y install alien
 #     dpkg -l | grep package-name
 
 # enable snaps and snap store - TAKES A REALLY LONG TIME
-sudo apt-get -y install snapd
-sudo snap install snap-store
+#sudo apt-get -y install snapd
+#sudo snap install snap-store
 
 sudo apt update
 sudo apt upgrade -y
