@@ -83,6 +83,8 @@
 #  - install xournalpp
 #  - install deluge
 #  - install playonlinux
+#  - install VLC player
+#  - install mpv player
 #  - install Joplin
 #  - install Minigalaxy (thin GOG client)
 #    - use cat >> to make "minigalaxy-login.sh" shortcuts to the Desktop and user's home directory to load Minigalaxy using a "WEBKIT_DISABLE_COMPOSITING_MODE=1" fix for a bug that prevents the login window content from showing. After login, you shouldn't have to use these shortcuts again, and can launch Minigalaxy normally, unless you get logged out.
