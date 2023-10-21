@@ -302,7 +302,8 @@ sudo apt-get -y install digikam
 sudo apt-get -y install kdenlive
 sudo apt-get -y install xournalpp
 sudo apt-get -y install deluge
-sudo apt-get -y install playonlinux 
+sudo apt-get -y install vlc 
+sudo apt-get -y install mpv 
 
 # install Joplin
 wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash
