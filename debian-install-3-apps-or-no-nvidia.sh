@@ -90,7 +90,8 @@
 #    - use cat >> to make "minigalaxy-login.sh" shortcuts to the Desktop and user's home directory to load Minigalaxy using a "WEBKIT_DISABLE_COMPOSITING_MODE=1" fix for a bug that prevents the login window content from showing. After login, you shouldn't have to use these shortcuts again, and can launch Minigalaxy normally, unless you get logged out.
 #      - use chmod to make the shortcuts executable
 #  - install Lutris
-#  - install Heroic Games Launcher v2.9.2 (need to edit the script for a different version)
+#  - install Heroic Games Launcher v2.9.2 (.deb install - need to edit the script for a different version)
+#  - install PDFsam Basic 5.2.2 (.deb install - need to edit the script for a different version)
 #  - install VMWare Workstation Player 17.5.0 (need to edit the script for a different version)
 #  - if installing this inside a VM: (need to remove or comment out manually if not)
 #    - install fix vmware-tools-patches (fixes the ability to share folders between guest and host OSs)
@@ -335,17 +336,27 @@ sudo apt update
 sudo apt-get -y install lutris
 
 
-# Heroic Games Launcher
+# install Heroic Games Launcher
+# MANUAL GET AND INSTALL OF DEBIAN .deb - no repo
 # https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher
 wget https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/releases/download/v2.9.2/heroic_2.9.2_amd64.deb
 sudo dpkg -i heroic_*_amd64.deb
 rm -rf heroic_*_amd64.deb 
 
 
+# install PDFsam Basic (PDF split and merge opensource freeware)
+# MANUAL GET AND INSTALL OF DEBIAN .deb - no repo
+# https://github.com/torakiki/pdfsam/
+wget https://github.com/torakiki/pdfsam/releases/download/v5.2.2/pdfsam_5.2.2-1_amd64.deb
+sudo dpkg -i pdfsam_*_amd64.deb
+rm -rf pdfsam_*_amd64.deb 
+
+
 # VMWare Workstation Player 17
 sudo apt-get -y install build-essential gcc perl bzip2 dkms make git
 sudo apt-get -y install linux-headers-$(uname -r)
 sudo apt update && sudo apt upgrade -y
+# below file backed up to "Linux Installers (Backups)" in case Broadcam makes changes, already works well and free
 wget https://download3.vmware.com/software/WKST-PLAYER-1750/VMware-Player-Full-17.5.0-22583795.x86_64.bundle
 chmod +x VMware-Player-Full-*.x86_64.bundle
 sudo ./VMware-Player-Full-*.x86_64.bundle
